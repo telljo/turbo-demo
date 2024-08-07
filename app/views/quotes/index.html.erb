@@ -1,0 +1,14 @@
+<h1>Quotes</h1>
+
+<%= turbo_stream_from "quotes_broadcaster" %>
+
+<%= link_to 'New Quote', new_quote_path %>
+
+<details data-turbo-permanent>
+  <summary>Details</summary>
+  Something small enough to escape casual notice.
+</details>
+
+<div id="quotes_list">
+  <%= render 'table' %>
+</div>
