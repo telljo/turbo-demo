@@ -9,17 +9,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%#= turbo_refreshes_with method: :replace, scroll: :reset %>
-    <%#>= turbo_refreshes_with method: :morph, scroll: :preserve %>
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
     <%= yield :head %>
   </head>
 
-  <body>
-    <div style='position:fixed; background-color: silver; top: 0;'>
-      <p id="notice"><%= notice %></p>
+  <body style='margin: 0;'>
+    <div style='position:fixed; background-color: silver; top: 0; padding: 0.5em;'>
+      <p id="notice">Current time (updates on page refresh) <%= notice %></p>
       <%= Time.zone.now%>
     </div>
 
-    <main style="padding:30px;">
+    <main style="padding:30px; width: 50em; margin: auto; margin-top: 5em;">
       <%= yield %>
     </main>
   </body>

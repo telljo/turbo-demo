@@ -2,7 +2,7 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: %i[ show edit update destroy ]
 
   def index
-    @quotes = Quote.all
+    @quotes = Quote.order(created_at: :desc)
   end
 
   def show
@@ -21,8 +21,10 @@ class QuotesController < ApplicationController
     respond_to do |format|
       if @quote.save
         format.html { redirect_to quote_url(@quote), notice: "Quote was successfully created." }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@quote, partial: 'quotes/form', locals: { quote: @quote }) }
       end
     end
   end
@@ -30,10 +32,10 @@ class QuotesController < ApplicationController
   def update
     if params[:like].present?
       @quote.increment!(:likes_count)
-      @quotes = Quote.all
-      return
-      # Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
-      # return redirect_to quotes_path
+      # @quotes = Quote.all
+      # return
+      Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
+      return redirect_to quotes_path
     end
     respond_to do |format|
       if @quote.update(quote_params)
@@ -46,9 +48,10 @@ class QuotesController < ApplicationController
 
   def destroy
     @quote.destroy!
-    Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
+
     respond_to do |format|
-      format.html { redirect_to quotes_url, notice: "Quote was successfully destroyed." }
+      format.html { redirect_to quotes_path, notice: "Quote was successfully destroyed." }
+      format.turbo_stream
     end
   end
 
@@ -58,6 +61,6 @@ class QuotesController < ApplicationController
     end
 
     def quote_params
-      params.require(:quote).permit(:name, :location, :start_date)
+      params.require(:quote).permit(:body, :author)
     end
 end

@@ -1,0 +1,13 @@
+<%= turbo_frame_tag dom_id(quote) do %>
+  <div class="quote">
+    <p><%= quote.body %></p>
+    <p>- <i><%= quote.author %></i></p>
+    <div class="quote__likes">
+      <%= button_to "#{ quote.likes_count} #{' like'.pluralize(quote.likes_count) }", quote_path(quote), class: "button", method: :patch, params: { like: true } %>
+    </div>
+    <section>
+      <%= link_to 'Edit', edit_quote_path(quote), class: "button button--warning" %>
+      <%= button_to 'Destroy', quote, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "button button--danger" %>
+    </section>
+  </div>
+<% end %>

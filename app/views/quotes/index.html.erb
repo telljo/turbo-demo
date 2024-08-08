@@ -1,14 +1,12 @@
-<h1>Quotes</h1>
-
 <%= turbo_stream_from "quotes_broadcaster" %>
 
-<%= link_to 'New Quote', new_quote_path %>
+<%= turbo_frame_tag Quote.new do %>
+  <div class="quote__header">
+    <h1>Quotes</h1>
+    <%= link_to 'New Quote', new_quote_path, class:"button button--submit" %>
+  </div>
+<% end %>
 
-<details data-turbo-permanent>
-  <summary>Details</summary>
-  Something small enough to escape casual notice.
-</details>
-
-<div id="quotes_list">
-  <%= render 'table' %>
+<div class="quote__list" id="quotes-list">
+  <%= render @quotes %>
 </div>

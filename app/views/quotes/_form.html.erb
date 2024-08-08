@@ -1,0 +1,13 @@
+<%= form_with(id: "quote_form", model: @quote) do |form| %>
+  <div class="quote">
+    <%= form.text_area :body, class:"quote__input", placeholder: "Quote", autofocus: true  %>
+    <%= form.text_area :author, class:"quote__input", placeholder: "Author" %>
+
+    <section>
+      <%= form.submit class:"button button--submit" %>
+
+      <%= link_to "Cancel", quotes_url,
+          class: "button button--cancel" %>
+    </section>
+  </div>
+<% end %>

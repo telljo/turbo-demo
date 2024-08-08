@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend "quotes-list", partial: "quote", locals: { quote: @quote } %>
+<%= turbo_stream.update Quote.new do %>
+  <div class="quote__header">
+    <h1>Quotes</h1>
+    <%= link_to 'New Quote', new_quote_path, class:"button button--submit" %>
+  </div>
+<% end %>

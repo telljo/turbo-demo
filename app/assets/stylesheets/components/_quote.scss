@@ -1,0 +1,49 @@
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  border: 1px solid #eee;
+  border-radius: 0.33em;
+  padding: 1em;
+  color: #333;
+
+  p {
+    margin: 0;
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em;
+  }
+
+  .quote__input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.33em;
+    margin-bottom: 0.2em;
+    min-height: 2em;
+  }
+
+  .quote__likes {
+    align-self: flex-end;
+  }
+}
+
+.quote__list {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.quote__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    color: #333;
+  }
+}
