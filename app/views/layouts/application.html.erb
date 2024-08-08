@@ -14,9 +14,9 @@
   </head>
 
   <body style='margin: 0;'>
-    <div style='position:fixed; background-color: silver; top: 0; padding: 0.5em;'>
+    <div style='position:fixed; width: 100%; text-align: center; top: 0; padding: 0.5em;'>
       <p id="notice">Current time (updates on page refresh) <%= notice %></p>
-      <%= Time.zone.now%>
+      <p style='color:#28a745'><%= Time.zone.now%></p>
     </div>
 
     <main style="padding:30px; width: 50em; margin: auto; margin-top: 5em;">
