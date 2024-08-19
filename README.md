@@ -34,8 +34,6 @@ The main branch showcases various features such as turbo streams, turbo frames, 
 
 - Ruby on Rails
 - Turbo
-- Stimulus (if used)
-- [Any other relevant technologies]
 
 ## Contributing
 
