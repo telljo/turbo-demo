@@ -1,9 +1,21 @@
 <div class="quote">
-  <p><%= quote.body %></p>
-  <p>- <i><%= quote.author %></i></p>
-  <div class="quote__likes">
-    <%= button_to "#{ quote.likes_count} #{' like'.pluralize(quote.likes_count) }", quote_path(quote), class: "button", method: :patch, params: { like: true } %>
-  </div>
+    <section class="quote__section">
+      <div class="quote__details">
+      <p><%= quote.body %></p>
+      <p>- <i><%= quote.author %></i></p>
+      </div>
+    <div class="quote__likes">
+      <span class="quote__like-count"><%= "#{ quote.likes_count} #{' like'.pluralize(quote.likes_count) }"%></span>
+        <div class="quote__like-buttons">
+        <%= button_to quote_path(quote), class: "button button--submit button--outline", method: :patch, params: { like: 1 } do %>
+          <p>&#128077;</p>
+        <% end %>
+        <%= button_to quote_path(quote), class: "button button--danger button--outline", method: :patch, params: { like: -1 } do %>
+          <p>&#128078;</p>
+        <% end %>
+        </div>
+    </div>
+    </section>
   <section>
     <%= link_to 'Edit', edit_quote_path(quote), class: "button button--warning" %>
     <%= button_to 'Destroy', quote, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "button button--danger" %>

@@ -29,7 +29,7 @@ class QuotesController < ApplicationController
 
   def update
     if params[:like].present?
-      @quote.increment!(:likes_count)
+      @quote.update(likes_count: @quote.likes_count + params[:like].to_i)
       @quotes = Quote.order(start_date: :desc)
 
       # Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
