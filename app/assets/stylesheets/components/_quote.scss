@@ -7,6 +7,16 @@
   padding: 1em;
   color: #333;
 
+  .quote__details {
+    padding: 0.2em;
+  }
+
+  .quote__section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   p {
     margin: 0;
   }
@@ -27,6 +37,24 @@
 
   .quote__likes {
     align-self: flex-end;
+  }
+
+  .quote__like-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em;
+  }
+
+  .quote__like-count {
+    background-color: #007bff;
+    display: flex;
+    color: white;
+    padding: 5px 10px;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 4px 2px;
+    cursor: default;
   }
 }
 
