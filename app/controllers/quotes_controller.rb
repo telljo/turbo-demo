@@ -31,6 +31,8 @@ class QuotesController < ApplicationController
     if params[:like].present?
       @quote.increment!(:likes_count)
       @quotes = Quote.order(start_date: :desc)
+
+      # Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
       return redirect_to quotes_path
     end
     respond_to do |format|

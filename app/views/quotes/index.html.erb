@@ -3,6 +3,13 @@
   <%= link_to 'New Quote', new_quote_path, class:"button button--submit" %>
 </div>
 
+<%= turbo_stream_from "quotes_broadcaster" %>
+
+<details data-turbo-permanent>
+  <summary>Details</summary>
+  Something small enough to escape casual notice.
+</details>
+
 <div class="quote__list" id="quotes-list">
   <%= render @quotes %>
 </div>
