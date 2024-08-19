@@ -8,7 +8,10 @@
   color: #333;
 
   .quote__details {
+    display: flex;
+    flex-direction: column;
     padding: 0.2em;
+    gap: 0.2em;
   }
 
   .quote__section {
