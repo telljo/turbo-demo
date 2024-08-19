@@ -22,9 +22,11 @@ This demo application demonstrates how to utilize Rails' Turbo and Morphing feat
   - `bundle install`
 3. Set up the database:
   - `rails db:create db:migrate`
-4. Start the Rails server:
+4. Seed the database:
+  - `bundle exec rake db:seed`
+5. Start the Rails server:
   - `bin/dev`
-5. Visit `http://localhost:3000` in your browser to see the demo in action.
+6. Visit `http://localhost:3000` in your browser to see the demo in action.
 
 ## Usage
 
