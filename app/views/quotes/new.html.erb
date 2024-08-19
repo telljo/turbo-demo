@@ -1,6 +1,4 @@
-<%= turbo_frame_tag @quote do %>
-  <div class="quote__header">
-    <h1>Quotes</h1>
-  </div>
-  <%= render partial: "form", locals: { quote: @quote } %>
-<% end %>
+<div class="quote__header">
+  <h1>Quotes</h1>
+</div>
+<%= render partial: "form", locals: { quote: @quote } %>

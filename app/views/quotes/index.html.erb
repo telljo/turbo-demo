@@ -1,11 +1,7 @@
-<%= turbo_stream_from "quotes_broadcaster" %>
-
-<%= turbo_frame_tag Quote.new do %>
-  <div class="quote__header">
-    <h1>Quotes</h1>
-    <%= link_to 'New Quote', new_quote_path, class:"button button--submit" %>
-  </div>
-<% end %>
+<div class="quote__header">
+  <h1>Quotes</h1>
+  <%= link_to 'New Quote', new_quote_path, class:"button button--submit" %>
+</div>
 
 <div class="quote__list" id="quotes-list">
   <%= render @quotes %>

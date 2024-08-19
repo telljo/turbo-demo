@@ -21,10 +21,8 @@ class QuotesController < ApplicationController
     respond_to do |format|
       if @quote.save
         format.html { redirect_to quote_url(@quote), notice: "Quote was successfully created." }
-        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@quote, partial: 'quotes/form', locals: { quote: @quote }) }
       end
     end
   end
@@ -32,9 +30,7 @@ class QuotesController < ApplicationController
   def update
     if params[:like].present?
       @quote.increment!(:likes_count)
-      # @quotes = Quote.all
-      # return
-      Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
+      @quotes = Quote.order(start_date: :desc)
       return redirect_to quotes_path
     end
     respond_to do |format|
@@ -50,8 +46,7 @@ class QuotesController < ApplicationController
     @quote.destroy!
 
     respond_to do |format|
-      format.html { redirect_to quotes_path, notice: "Quote was successfully destroyed." }
-      format.turbo_stream
+      format.html { redirect_to quotes_url, notice: "Quote was successfully destroyed." }
     end
   end
 
