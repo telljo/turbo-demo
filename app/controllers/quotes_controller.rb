@@ -20,11 +20,11 @@ class QuotesController < ApplicationController
 
     respond_to do |format|
       if @quote.save
-        format.html { redirect_to quote_url(@quote), notice: "Quote was successfully created." }
-        format.turbo_stream
+        format.html { redirect_to quotes_url}
+        format.turbo_stream { flash.now[:notice] = 'Quote was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@quote, partial: 'quotes/form', locals: { quote: @quote }) }
+        format.turbo_stream { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -32,16 +32,16 @@ class QuotesController < ApplicationController
   def update
     if params[:like].present?
       @quote.update(likes_count: @quote.likes_count + params[:like].to_i)
-      # @quotes = Quote.all
-      # return
-      Turbo::StreamsChannel.broadcast_refresh_to "quotes_broadcaster"
       return redirect_to quotes_path
-    end
-    respond_to do |format|
-      if @quote.update(quote_params)
-        format.html { redirect_to quote_url(@quote), notice: "Quote was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
+    else
+      respond_to do |format|
+        if @quote.update(quote_params)
+          format.html { redirect_to quotes_url }
+          format.turbo_stream { flash.now[:notice] = 'Quote was successfully created.' }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.turbo_stream { render :new, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -50,8 +50,8 @@ class QuotesController < ApplicationController
     @quote.destroy!
 
     respond_to do |format|
-      format.html { redirect_to quotes_path, notice: "Quote was successfully destroyed." }
-      format.turbo_stream
+      format.html { redirect_to quotes_path }
+      format.turbo_stream { flash.now[:notice] = 'Quote was successfully deleted.' }
     end
   end
 

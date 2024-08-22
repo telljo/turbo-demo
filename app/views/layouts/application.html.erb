@@ -8,15 +8,18 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%#= turbo_refreshes_with method: :replace, scroll: :reset %>
     <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
     <%= yield :head %>
   </head>
 
   <body style='margin: 0;'>
     <div style='position:absolute; width: 100%; text-align: center; top: 0; padding: 0.5em 0;'>
-      <p id="notice">Current time (updates on page refresh)</p>
+      <p>Current time (updates on page refresh)</p>
       <p style='color:#28a745'><%= Time.zone.now%></p>
+    </div>
+
+    <div id="flash" class="flash">
+      <%= render "layouts/flash" %>
     </div>
 
     <main style="padding:30px; width: 50em; margin: auto; margin-top: 5em;">
